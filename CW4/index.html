@@ -46,7 +46,7 @@ function check() {
 function init() {
   plat.innerText =navigator.userAgentData.platform;
   navigator.geolocation.getCurrentPosition(x => 
-  loc.innerText =(x.coords.latitude.toFixed(3))+" , "+x.coords.longitude.toFixed(3));
+  loc.innerText =(x.coords.latitude.toFixed(4))+" , "+x.coords.longitude.toFixed(4));
   navigator.getBattery().then(b => lev.innerText = "% "+(b.level*100) );
 }
 
