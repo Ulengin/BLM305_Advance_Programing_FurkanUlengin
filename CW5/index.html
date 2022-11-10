@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="../../images/hig.png">
+    <title>Battery Status </title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px;background: white; }
+    #url { width: 190px; }
+    span, #url { color: blue; }
+  </style>
+</head>
+
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+
+<h2 id="title" title="batTitle">Batery Status</h2>
+<p title="">
+<span id="chargeStat">xxx</span>
+</p>
+<p title="Battery level (integer)">
+  Battery level: <span id="lev">xxx</span>
+</p>
+<h2 id="title" title="batTitle">Online Status</h2>
+<p title="">
+  Online/Ofline <span id="onlinestatus">xxx</span>
+</p>
+<h2 id="title" title="batTitle">Keybord</h2>
+<p title="">
+   <span id="keyboard"></span>
+</p>
+
+<hr>
+<b>Sample code</b>
+<pre id="sample">function init() {<br>//complete the code below<br>    plat.innerText = 'xxx';<br>    navigator.geolocation<br>      .getCurrentPosition(p =&gt;<br>        loc.innerText = 'xxx'<br>      );<br>    navigator.getBattery().then(b =&gt;<br>        lev.innerText = 'xxx'<br>      );<br>    check()<br>}<br>function check() {<br>//complete the code below<br>    fetch(url.value).then(r =&gt; <br>      resp.innerText = r.ok? 'OK' : 'xxx'<br>    ).catch(e =&gt; <br>      resp.innerText = 'err'<br>    )<br>}</pre>
+
+<hr>
+
+<script>
+"use strict";
+
+ 
+function init() {
+  navigator.getBattery().then(b =>
+        lev.innerText = 100 * b.level + '%'
+      )
+      navigator.getBattery().then(b =>chargeStat.innerText = (b.charging ? "Charging..." : "Discharging...")
+      )
+      navigator.getBattery().then(b =>b.onchargingchange = () => chargeStat.innerText = (b.charging ? "Charging..." : "Discharging...")
+      )
+      navigator.getBattery().then(b =>b.onlevelchange = () => lev.innerText = (b.level * 100 + '%')
+      )
+      onlinestatus.innerText = navigator.onLine ? "connected--online" : "disconnected -- offline";
+      window.addEventListener('online', event => 
+      {onlinestatus.innerText = "connected -- online";}, false);
+
+      window.addEventListener('offline', event => { 
+      onlinestatus.innerText = "disconnected--offline";}, false);
+      window.addEventListener("keydown", event => {keyboard.innerText = event.key      
+      });
+      window.addEventListener("keypress", event => {keyboard.innerText = event.key  
+      });
+      window.addEventListener("keyup", event=>{keyboard.innerText= onkeyup
+      });
+}
+    title.innerText = document.title;
+    sample.innerText = init
+    init();
+    
+</script>
+
+
+
+</body></html>
