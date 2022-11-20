@@ -1,0 +1,28 @@
+<style>
+	#boy{
+		background: url(sprite-sheet.png);
+		width: 400px;
+		height: 600px;
+	}
+	@keyframes boy_kick {
+		from { background-position: 0 0; }
+		to { background-position: 0 -3600px; }
+	}
+	@-webkit-keyframes boy_kick {
+		from { background-position: 0 0; }
+		to { background-position: 0 -3600px; }
+	}
+	</style>
+	<div id="boy"></div>
+	<button id="startbtn">Start</button>
+	<button id="stopbtn">Stop</button>
+	<script>
+	startbtn.addEventListener("click", function(){
+		boy.style.animation = "boy_kick 0.6s steps(6) infinite";
+		boy.style.webkitAnimation = "boy_kick 0.6s steps(6) infinite";
+	});
+	stopbtn.addEventListener("click", function(){
+		boy.style.animation = "";
+		boy.style.webkitAnimation = "";
+	});
+	</script>
