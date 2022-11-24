@@ -1,28 +1,118 @@
-<style>
-	#boy{
-		background: url(sprite-sheet.png);
-		width: 400px;
-		height: 600px;
-	}
-	@keyframes boy_kick {
-		from { background-position: 0 0; }
-		to { background-position: 0 -3600px; }
-	}
-	@-webkit-keyframes boy_kick {
-		from { background-position: 0 0; }
-		to { background-position: 0 -3600px; }
-	}
-	</style>
-	<div id="boy"></div>
-	<button id="startbtn">Start</button>
-	<button id="stopbtn">Stop</button>
-	<script>
-	startbtn.addEventListener("click", function(){
-		boy.style.animation = "boy_kick 0.6s steps(6) infinite";
-		boy.style.webkitAnimation = "boy_kick 0.6s steps(6) infinite";
+<body>
+    <button id="startbtn", position: absolute>Start</button>
+	<button id="stopbtn", position: absolute>Stop</button>
+    <button id="pausebtn", position: absolute>Pause</button>
+	<button id="nextbtn", position: absolute>Next</button>
+    <button id="prevbtn", position: absolute>Prev</button>
+    <img id="image">
+</body>
+<head>
+    <style>
+        #image {
+            position: absolute;
+        }
+    </style>
+</head>
+<script>
+    let image = document.querySelector('#image')
+    let karesayisi = 10;
+    let index = 1;
+    let setTimeoutreturn;
+    let setTimeOutWorking = false;
+    let durum = true;
+
+
+    function play() {
+      if (setTimeOutWorking) return;
+      setTimeoutreturn = setTimeout(guncelle,150);
+      setTimeOutWorking = true;
+    }
+    function guncelle() {
+        if(index>0 && index<11){
+            fetch("https://ulengin.github.io/BLM305_Advance_Programing_FurkanUlengin/HW3/sprite/" + index + ".png")
+            .then((res) => res.blob())
+            .then((blob) => {
+                var urlyap = window.URL || window.webkitURL;
+                var myObject = urlyap.createObjectURL(blob);
+                image.src = myObject;
+            });
+
+            index = (index % karesayisi) + 1;
+            setTimeOutWorking = false;
+            console.log(index);
+            image.style.marginLeft=index*60+"px";
+            play();
+        }
+    }
+    function devam() {
+        image.style.marginLeft=index*60+"px";
+        if(index>0 && index<11){
+            fetch("https://ulengin.github.io/BLM305_Advance_Programing_FurkanUlengin/HW3/sprite/" + index + ".png")
+            .then((res) => res.blob())
+            .then((blob) => {
+                var urlyap = window.URL || window.webkitURL;
+                var myObject = urlyap.createObjectURL(blob);
+                image.src = myObject;
+            });
+
+            index = (index % karesayisi) + 1;
+            setTimeOutWorking = false;
+            console.log(index);
+        }
+    }
+    function geri() {
+        image.style.marginLeft=index*60+"px";
+        if(index>0 && index<11){
+                fetch("https://ulengin.github.io/BLM305_Advance_Programing_FurkanUlengin/HW3/sprite/" + index + ".png")
+                    .then((res) => res.blob())
+                    .then((blob) => {
+                        var urlyap = window.URL || window.webkitURL;
+                        var myObject = urlyap.createObjectURL(blob);
+                        image.src = myObject;
+                    });
+
+                index = (index % karesayisi) - 1;
+                setTimeOutWorking = false;
+                if(index<=0){
+                    idnex=1;
+                    console.log(index);
+                }
+                
+            
+        }
+    }
+    startbtn.addEventListener("click", function(){
+		setTimeout(play(),150);
 	});
 	stopbtn.addEventListener("click", function(){
-		boy.style.animation = "";
-		boy.style.webkitAnimation = "";
+        clearTimeout(setTimeoutreturn);
+        setTimeOutWorking=false;
 	});
-	</script>
+    pausebtn.addEventListener("click", function(){
+        if(durum){
+            clearTimeout(setTimeoutreturn);
+            setTimeOutWorking=false;
+            durum = false;
+        }else{
+            setTimeout(play(),150);
+            durum=true;
+        }
+	});
+    nextbtn.addEventListener("click", function(){
+        if(index>0 && index<11){
+            devam()
+        }
+        if(index<1 || index>10){
+            index=1;
+            devam()
+        }
+	});
+    prevbtn.addEventListener("click", function(){
+        if(index>0 && index<11){
+            geri()
+        }
+        if(index<1){
+            geri()
+        }
+	}); 
+</script>
