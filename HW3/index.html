@@ -18,8 +18,9 @@
     let karesayisi = 10;
     let index = 1;
     let setTimeoutreturn;
-    let setTimeOutWorking = false;
     let durum = true;
+    let setTimeOutWorking = false;
+    
 
 
     function play() {
@@ -36,7 +37,6 @@
                 var myObject = urlyap.createObjectURL(blob);
                 image.src = myObject;
             });
-
             index = (index % karesayisi) + 1;
             setTimeOutWorking = false;
             console.log(index);
@@ -54,7 +54,6 @@
                 var myObject = urlyap.createObjectURL(blob);
                 image.src = myObject;
             });
-
             index = (index % karesayisi) + 1;
             setTimeOutWorking = false;
             console.log(index);
@@ -77,8 +76,6 @@
                     idnex=1;
                     console.log(index);
                 }
-                
-            
         }
     }
     startbtn.addEventListener("click", function(){
