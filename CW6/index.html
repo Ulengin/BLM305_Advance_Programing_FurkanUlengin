@@ -27,7 +27,6 @@
 <p>Ref: <a href="https://developer.github.com/v3/#rate-limiting" 
    target=NewTab>GitHub Developer</a>
 </p>
-
 <script>
 "use strict";
 function error(t) {
@@ -35,9 +34,13 @@ function error(t) {
     out.innerText = t; throw t
 }
 async function toJSON(url) {
+  try {
     let r = await fetch(url)
-    if (!r.ok) error(r.statusText)
+    if (!r.ok) exception(r.status)
     return r.json()
+  } catch (e) {
+    error(e)
+  }
 }
 async function readUser() {
     const BR = "<BR>", 
