@@ -1,5 +1,5 @@
 const CACHE ='PROJE'
-const FILES = ['/PROJE/index.html','/PROJE/manifest.json','/PROJE/script.js','/PROJE/style.css','/PROJE/sw.js','/PROJE/images/image.png','./']
+const FILES = ['index.html','manifest.json','script.js','style.css','sw.js','images/image.png','./']
 function installCB(e) {
   e.waitUntil(
     caches.open(CACHE)
@@ -8,7 +8,7 @@ function installCB(e) {
   )
 } 
 self.addEventListener('install', installCB)
- function save(req, resp) {
+function save(req, resp) {
   return caches.open(CACHE)
   .then(cache => {
     cache.put(req, resp.clone());
