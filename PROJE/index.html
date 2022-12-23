@@ -40,23 +40,7 @@
       </div>
     </div>     
     <h1 class="message">You win!</h1>
-    <button id="install-app" style="display: none">Uygulamayı Yükle</button>
-    <script>
-    const installButton = document.getElementById('install-app');
-    let beforeInstallPromptEvent
-    window.addEventListener("beforeinstallprompt", function(e) {
-        e.preventDefault();
-        beforeInstallPromptEvent = e
-        installButton.style.display = 'block'
-        installButton.addEventListener("click", function() {
-            e.prompt();
-        });
-        installButton.hidden = false;
-    });
-    installButton.addEventListener("click", function() {
-        beforeInstallPromptEvent.prompt();
-    });
-</script>
+
 
   </body>
 </html>
