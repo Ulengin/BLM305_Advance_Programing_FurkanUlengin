@@ -1,6 +1,6 @@
 {
   "name": "Puzzle Game",
-  "start_url": "/JS/index.html",
+  "start_url": "/PROJE/index.html",
   "display": "standalone",
   "background_color": "cyan",
   "icons": [
