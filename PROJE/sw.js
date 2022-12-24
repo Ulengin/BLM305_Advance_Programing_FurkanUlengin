@@ -1,19 +1,33 @@
 const CACHE ='PROJE'
-const FILES = ['index.html','manifest.json','script.js','style.css','sw.js','images/image3.png']
-function installCB(e) {
-  e.waitUntil(
-    caches.open(CACHE)
-    .then(cache => cache.addAll(FILES))
-    .catch(console.log)
-  )
-} 
-self.addEventListener('install', installCB)
+function installCB(e) {  // consola yazıyoruz
+  console.log(CACHE, e);
+}
+addEventListener('install', installCB) //eventi dinliyor gerçekleşince çağıracak
 
-function fetchCB(e) { //fetch first
+function fetchCB(e) {   // sayfaya gidiyor ve save yapıyor
   let req = e.request
   e.respondWith(
     fetch(req).then(r2 => save(req, r2))
-    .catch(() => { return caches.match(req).then(r1 => r1) })
+    .catch(() => caches.match(req).then(report))
   )
 }
-self.addEventListener('fetch', fetchCB)
+function report(req) {
+    console.log(CACHE+' matches '+req.url)
+    return req
+  }
+addEventListener('fetch', fetchCB)
+
+function activateCB(e) {
+  console.log(CACHE, e);
+}
+function save(req, resp) {
+    if (!req.url.includes("github")) 
+       return resp;
+    return caches.open(CACHE)
+    .then(cache => { 
+      cache.put(req, resp.clone());
+      return resp;
+    }) 
+    .catch(console.err)
+  }
+addEventListener('activate', activateCB);
