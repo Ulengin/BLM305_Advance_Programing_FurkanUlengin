@@ -1,4 +1,4 @@
-const CACHE ='PROJE'
+const CACHE ='AP'
 function installCB(e) {  // consola yazıyoruz
   console.log(CACHE, e);
 }
