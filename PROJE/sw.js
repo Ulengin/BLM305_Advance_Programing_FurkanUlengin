@@ -1,5 +1,5 @@
 const CACHE ='PROJE'
-const FILES = ['index.html','manifest.json','script.js','style.css','sw.js','images/image.png/']
+const FILES = ['index.html','manifest.json','script.js','style.css','sw.js','images/image3.png/']
 function installCB(e) {
   e.waitUntil(
     caches.open(CACHE)
