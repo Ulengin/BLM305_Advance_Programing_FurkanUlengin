@@ -9,14 +9,6 @@ function installCB(e) {
 } 
 self.addEventListener('install', installCB)
 
-function save(req, resp) {
-  return caches.open(CACHE)
-  .then(cache => {
-    cache.put(req, resp.clone());
-    return resp;
-  }) 
-  .catch(console.log)
-}
 function fetchCB(e) { //fetch first
   let req = e.request
   e.respondWith(
